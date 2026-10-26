@@ -102,7 +102,6 @@ AI 腔文本（`samples/ai-slop.txt`）：
 ## 作者
 
 - B站：二次元然酱
-- 邮箱：331305990 [at] qq.com
 
 ## License
 
