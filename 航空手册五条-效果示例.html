@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>航空手册五条 · 效果示例</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:#0d0f13; color:#e8edf3; padding:36px 20px 44px;
+    font-family:"PingFang SC","Microsoft YaHei",-apple-system,"Segoe UI",sans-serif;
+    line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+  .wrap { max-width:900px; margin:0 auto; }
+
+  .eyebrow { display:inline-block; font-size:12px; letter-spacing:1.5px; color:#ff9a6b;
+    border:1px solid rgba(255,122,69,.35); border-radius:20px; padding:3px 12px; margin-bottom:16px; }
+  h1 { font-size:32px; font-weight:700; letter-spacing:.5px; margin-bottom:10px; }
+  .lead { font-size:16px; color:#b7c0cd; max-width:620px; }
+  .lead b { color:#ffb08a; font-weight:600; }
+
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin:28px 0 8px; }
+  .stat { background:#161a21; border:1px solid #242a35; border-radius:12px; padding:14px 16px; }
+  .stat .k { font-size:11.5px; color:#8b95a5; letter-spacing:.5px; }
+  .stat .v { font-size:22px; font-weight:700; margin-top:4px; color:#ff9a6b; }
+  .stat .v small { font-size:12px; color:#8b95a5; font-weight:400; margin-left:4px; }
+  .stat .d { font-size:11.5px; color:#6f7887; margin-top:2px; }
+
+  h2 { font-size:18px; font-weight:600; margin:34px 0 6px; display:flex; align-items:center; gap:9px; }
+  h2:before { content:""; width:4px; height:16px; background:#ff7a45; border-radius:2px; }
+  .sub { font-size:13px; color:#8b95a5; margin-bottom:14px; }
+
+  .cmp { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media(max-width:680px){ .cmp{ grid-template-columns:1fr; } }
+  .panel { border-radius:14px; padding:16px 18px; border:1px solid #242a35; background:#161a21; }
+  .panel.bad { border-color:rgba(255,107,107,.32); background:rgba(255,107,107,.05); }
+  .panel.good { border-color:rgba(61,220,151,.32); background:rgba(61,220,151,.05); }
+  .panel .tag { display:inline-block; font-size:11.5px; padding:2px 9px; border-radius:6px; margin-bottom:10px; }
+  .panel.bad .tag { background:rgba(255,107,107,.16); color:#ff9b9b; }
+  .panel.good .tag { background:rgba(61,220,151,.16); color:#5ee8ae; }
+  .panel .q { font-size:13px; color:#98a2b3; margin-bottom:8px; }
+  .panel p { font-size:14.5px; color:#dfe6ee; }
+  .panel p + p { margin-top:8px; }
+  .panel .note { font-size:11.5px; color:#7a8494; margin-top:10px; border-top:1px dashed #2a3140; padding-top:8px; }
+  .hl { color:#ff9b9b; border-bottom:1px dashed rgba(255,107,107,.6); }
+
+  .term { background:#0a0c10; border:1px solid #242a35; border-radius:12px; padding:14px 16px;
+    font-family:Consolas,"Courier New",monospace; font-size:12.5px; line-height:1.8; overflow-x:auto;
+    white-space:pre-wrap; }
+  .term .hd { color:#7ee787; }
+  .term .meta { color:#b7c0cd; }
+  .term .err { color:#ff8a8a; }
+  .term .warn { color:#f0b429; }
+  .term .ok { color:#5ee8ae; }
+  .arrow { text-align:center; color:#5a6472; font-size:18px; margin:8px 0; }
+
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
+  .chip { font-size:12.5px; padding:6px 12px; border-radius:20px; border:1px solid #2a3140;
+    background:#161a21; color:#c3ccd8; }
+  .chip b { color:#ff9a6b; font-weight:600; }
+  .chip.full b { color:#ff7a45; }
+  .chip.off b { color:#7a8494; }
+
+  .foot { margin-top:36px; padding-top:16px; border-top:1px solid #1e242e;
+    font-size:12px; color:#6f7887; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+  .foot b { color:#98a2b3; font-weight:500; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">SKILL · 内容创作 · 写作</div>
+  <h1>航空手册五条</h1>
+  <p class="lead">把 AI 的八百字小作文，压成<b>三句能直接用的话</b>。写法标准来自飞机维修手册——那个行业写错一个词就是事故，所以他们的规矩最死板、也最管用。</p>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="k">平均句长</div>
+      <div class="v">88 <small>字 → 8.3 字</small></div>
+      <div class="d">同一段内容改写前后</div>
+    </div>
+    <div class="stat">
+      <div class="k">硬违规</div>
+      <div class="v">2 条 <small>→ 0 条</small></div>
+      <div class="d">长句与客套话已清零</div>
+    </div>
+    <div class="stat">
+      <div class="k">场景自动切换</div>
+      <div class="v">7 <small>种</small></div>
+      <div class="d">不搞全局一刀切</div>
+    </div>
+    <div class="stat">
+      <div class="k">基准样本</div>
+      <div class="v">124 <small>句零违规</small></div>
+      <div class="d">平均 8.1 字 / 最长 19 字</div>
+    </div>
+  </div>
+
+  <h2>同一段攻略，两种写法</h2>
+  <p class="sub">同样的问题、同样的信息量，左边是 AI 的默认输出，右边是装上约束之后</p>
+
+  <div class="cmp">
+    <div class="panel bad">
+      <span class="tag">没装 · AI 默认</span>
+      <div class="q">问：这个 BOSS 的二阶段怎么打？</div>
+      <p><span class="hl">需要特别指出的是，这个 BOSS 的二阶段机制比较复杂，一般情况下建议玩家先查看相关攻略再进行挑战，以免因为不熟悉机制而导致不必要的损失，同时也要注意队伍配置和装备等级的合理性。</span></p>
+      <div class="note">1 句 88 字 · 读到最后已经忘了开头在说什么</div>
+    </div>
+
+    <div class="panel good">
+      <span class="tag">装了 · 五条约束</span>
+      <div class="q">问：这个 BOSS 的二阶段怎么打？</div>
+      <p>二阶段先躲红色地刺。地刺出现前有两秒预警。躲完往左边走。</p>
+      <p>左边的核心是弱点。核心亮起时再打它。其他时候清小怪。</p>
+      <p>血量低于三成会狂暴。狂暴之后不要贪输出。</p>
+      <div class="note">8 句 · 平均 8.3 字 · 最长 10 字 · 观众扫一眼就能上手</div>
+    </div>
+  </div>
+
+  <h2>它还会给你的成稿做体检</h2>
+  <p class="sub">自带中文检查器，一条命令把长句、客套话、藏主语、营销词一次标出来</p>
+
+  <div class="term">
+<span class="hd">=== 稿子.md ===</span>
+<span class="meta">  句子 1 条｜平均 88.0 字｜最长 88 字｜上限 30</span>
+<span class="meta">  硬违规 2 条｜提示 1 条</span>
+<span class="err">  ✗ [long-sentence] 句子 88 字（上限 30）。拆成两句，一句一事。</span>
+<span class="warn">  ! [multi-idea] 4 个逗号、88 字，可能一句塞了多件事。逐件拆开。</span>
+<span class="err">  ✗ [filler] 客套话/填充语「需要特别指出的是」。要么给确定答案，要么直接说不确定。</span>
+  </div>
+
+  <div class="arrow">↓ 按提示逐件拆开</div>
+
+  <div class="term">
+<span class="hd">=== 稿子.md ===</span>
+<span class="meta">  句子 8 条｜平均 8.3 字｜最长 10 字｜上限 30</span>
+<span class="meta">  硬违规 0 条｜提示 0 条</span>
+<span class="ok">  ✓ 干净</span>
+  </div>
+
+  <h2>七种场景，自动开合</h2>
+  <p class="sub">同一套规矩不能到处硬套——写标题时它反而会杀死点击率</p>
+  <div class="chips">
+    <span class="chip full"><b>攻略 / 步骤</b> · 全开</span>
+    <span class="chip"><b>解说稿 / 口播</b> · 只开 3 条</span>
+    <span class="chip full"><b>直播大纲 / 周报</b> · 全开</span>
+    <span class="chip"><b>查资料 / 核事实</b> · 只开 2 条</span>
+    <span class="chip full"><b>成稿体检</b> · 全开当检查器</span>
+    <span class="chip off"><b>标题 / 钩子</b> · 全关</span>
+    <span class="chip off"><b>创意 / 脑暴</b> · 全关</span>
+  </div>
+
+  <h2>五条规矩</h2>
+  <p class="sub">每一条都能用机器检查，不用靠自觉</p>
+  <div class="chips">
+    <span class="chip">每句不超过 <b>30 字</b></span>
+    <span class="chip">一句只讲 <b>一件事</b></span>
+    <span class="chip">同一个东西用 <b>同一个词</b></span>
+    <span class="chip">写清 <b>谁去执行</b></span>
+    <span class="chip">不确定就 <b>说不确定</b></span>
+  </div>
+
+  <div class="foot">
+    <span><b>航空手册五条</b> · 场景路由约束 + 中文结构检查器</span>
+    <span>作者：B站 二次元然酱</span>
+  </div>
+
+</div>
+</body>
+</html>
