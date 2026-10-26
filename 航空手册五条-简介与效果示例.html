@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>航空手册五条 · 简介与效果示例</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:#0d0f13; color:#e8edf3; padding:36px 20px 44px;
+    font-family:"PingFang SC","Microsoft YaHei",-apple-system,"Segoe UI",sans-serif;
+    line-height:1.7; -webkit-font-smoothing:antialiased;
+  }
+  .wrap { max-width:860px; margin:0 auto; }
+
+  .eyebrow { display:inline-block; font-size:12px; letter-spacing:1.5px; color:#ff9a6b;
+    border:1px solid rgba(255,122,69,.35); border-radius:20px; padding:3px 12px; margin-bottom:16px; }
+  h1 { font-size:32px; font-weight:700; letter-spacing:.5px; margin-bottom:10px; }
+  .lead { font-size:16.5px; color:#b7c0cd; max-width:640px; }
+  .lead b { color:#ffb08a; font-weight:600; }
+
+  h2 { font-size:16px; font-weight:600; margin:32px 0 10px; display:flex; align-items:center; gap:9px; color:#ffb08a; }
+  h2:before { content:""; width:3px; height:14px; background:#ff7a45; border-radius:2px; }
+
+  .card { background:#161a21; border:1px solid #242a35; border-radius:12px; padding:16px 18px; }
+  .card p { font-size:14.5px; color:#dfe6ee; }
+  .card p + p { margin-top:10px; }
+
+  .src dt { font-size:12px; color:#8b95a5; margin-top:10px; }
+  .src dt:first-child { margin-top:0; }
+  .src dd { font-size:14px; color:#dfe6ee; }
+  .src dd b { color:#ffb08a; font-weight:600; }
+
+  .quote { border-left:3px solid #ff7a45; padding:2px 0 2px 16px; margin:14px 0; }
+  .quote .en { font-size:13.5px; color:#c9d2de; font-style:italic; line-height:1.75; }
+  .quote .zh { font-size:14px; color:#e8edf3; margin-top:10px; }
+  .quote .who { font-size:11.5px; color:#7a8494; margin-top:10px; }
+
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin:24px 0 8px; }
+  .stat { background:#161a21; border:1px solid #242a35; border-radius:12px; padding:14px 16px; }
+  .stat .k { font-size:11.5px; color:#8b95a5; letter-spacing:.5px; }
+  .stat .v { font-size:22px; font-weight:700; margin-top:4px; color:#ff9a6b; }
+  .stat .v small { font-size:12px; color:#8b95a5; font-weight:400; margin-left:4px; }
+  .stat .d { font-size:11.5px; color:#6f7887; margin-top:2px; }
+
+  .cmp { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media(max-width:680px){ .cmp{ grid-template-columns:1fr; } }
+  .panel { border-radius:14px; padding:16px 18px; border:1px solid #242a35; background:#161a21; }
+  .panel.bad { border-color:rgba(255,107,107,.32); background:rgba(255,107,107,.05); }
+  .panel.good { border-color:rgba(61,220,151,.32); background:rgba(61,220,151,.05); }
+  .panel .tag { display:inline-block; font-size:11.5px; padding:2px 9px; border-radius:6px; margin-bottom:10px; }
+  .panel.bad .tag { background:rgba(255,107,107,.16); color:#ff9b9b; }
+  .panel.good .tag { background:rgba(61,220,151,.16); color:#5ee8ae; }
+  .panel .q { font-size:13px; color:#98a2b3; margin-bottom:8px; }
+  .panel p { font-size:14.5px; color:#dfe6ee; }
+  .panel p + p { margin-top:8px; }
+  .panel .note { font-size:11.5px; color:#7a8494; margin-top:10px; border-top:1px dashed #2a3140; padding-top:8px; }
+  .hl { color:#ff9b9b; border-bottom:1px dashed rgba(255,107,107,.6); }
+
+  .term { background:#0a0c10; border:1px solid #242a35; border-radius:12px; padding:14px 16px;
+    font-family:Consolas,"Courier New",monospace; font-size:12.5px; line-height:1.8; overflow-x:auto;
+    white-space:pre-wrap; }
+  .term .hd { color:#7ee787; }
+  .term .meta { color:#b7c0cd; }
+  .term .err { color:#ff8a8a; }
+  .term .warn { color:#f0b429; }
+  .term .ok { color:#5ee8ae; }
+  .arrow { text-align:center; color:#5a6472; font-size:18px; margin:8px 0; }
+
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:6px; }
+  .chip { font-size:12.5px; padding:6px 12px; border-radius:20px; border:1px solid #2a3140;
+    background:#161a21; color:#c3ccd8; }
+  .chip b { color:#ff9a6b; font-weight:600; }
+  .chip.full b { color:#ff7a45; }
+  .chip.off b { color:#7a8494; }
+
+  .cta { margin-top:26px; padding:18px 20px; border-radius:12px;
+    background:linear-gradient(135deg,rgba(255,122,69,.14),rgba(255,154,107,.05));
+    border:1px solid rgba(255,122,69,.3); }
+  .cta .t { font-size:17px; font-weight:600; color:#ffb08a; margin-bottom:4px; }
+  .cta .d { font-size:13px; color:#98a2b3; }
+
+  .foot { margin-top:26px; padding-top:14px; border-top:1px solid #1e242e;
+    font-size:12px; color:#6f7887; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+  .foot b { color:#98a2b3; font-weight:500; }
+
+  h3 { font-size:13.5px; font-weight:600; color:#98a2b3; margin:14px 0 6px; }
+  p { font-size:14.5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">SKILL · 内容创作 · 写作</div>
+  <h1>航空手册五条</h1>
+  <p class="lead">把 AI 的八百字小作文，压成<b>三句能直接用的话</b>。</p>
+
+  <h2>简介</h2>
+  <div class="card">
+    <p>这套约束源自航空维修手册的写法标准——那个行业给全球不同母语的机务看手册，写错一个词就是事故，所以规矩最死板、也最管用。</p>
+    <p>「航空手册五条」把它换算成中文五条：每句不超过 30 字、一句只讲一件事、同一个东西用同一个词、写清谁去执行、不确定就说不确定。并按场景自动开关——写攻略全开，剪解说稿只开三条，做标题和脑洞全关，避免把点击率杀死。</p>
+    <p>它不只管 AI：周报、邮件、攻略都能过一遍。附带一个中文结构检查器，一条命令给成稿做体检，标出超长句、客套话、藏起来的主语和营销形容词。</p>
+  </div>
+
+  <h2>效果示例</h2>
+  <p class="sub">同一段攻略，两种写法</p>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="k">平均句长</div>
+      <div class="v">88 <small>字 → 8.3 字</small></div>
+      <div class="d">同一段内容改写前后</div>
+    </div>
+    <div class="stat">
+      <div class="k">硬违规</div>
+      <div class="v">2 条 <small>→ 0 条</small></div>
+      <div class="d">长句与客套话已清零</div>
+    </div>
+    <div class="stat">
+      <div class="k">场景自动切换</div>
+      <div class="v">7 <small>种</small></div>
+      <div class="d">不搞全局一刀切</div>
+    </div>
+    <div class="stat">
+      <div class="k">基准样本</div>
+      <div class="v">124 <small>句零违规</small></div>
+      <div class="d">平均 8.1 字 / 最长 19 字</div>
+    </div>
+  </div>
+
+  <div class="cmp">
+    <div class="panel bad">
+      <span class="tag">没装 · AI 默认</span>
+      <div class="q">问：这个 BOSS 的二阶段怎么打？</div>
+      <p><span class="hl">需要特别指出的是，这个 BOSS 的二阶段机制比较复杂，一般情况下建议玩家先查看相关攻略再进行挑战，以免因为不熟悉机制而导致不必要的损失，同时也要注意队伍配置和装备等级的合理性。</span></p>
+      <div class="note">1 句 88 字 · 读到最后已经忘了开头在说什么</div>
+    </div>
+
+    <div class="panel good">
+      <span class="tag">装了 · 五条约束</span>
+      <div class="q">问：这个 BOSS 的二阶段怎么打？</div>
+      <p>二阶段先躲红色地刺。地刺出现前有两秒预警。躲完往左边走。</p>
+      <p>左边的核心是弱点。核心亮起时再打它。其他时候清小怪。</p>
+      <p>血量低于三成会狂暴。狂暴之后不要贪输出。</p>
+      <div class="note">8 句 · 平均 8.3 字 · 最长 10 字 · 观众扫一眼就能上手</div>
+    </div>
+  </div>
+
+  <h3>检查器真实输出</h3>
+  <div class="term">
+<span class="hd">=== 稿子.md ===</span>
+<span class="meta">  句子 1 条｜平均 88.0 字｜最长 88 字｜上限 30</span>
+<span class="meta">  硬违规 2 条｜提示 1 条</span>
+<span class="err">  ✗ [long-sentence] 句子 88 字（上限 30）。拆成两句，一句一事。</span>
+<span class="warn">  ! [multi-idea] 4 个逗号、88 字，可能一句塞了多件事。逐件拆开。</span>
+<span class="err">  ✗ [filler] 客套话/填充语「需要特别指出的是」。要么给确定答案，要么直接说不确定。</span>
+  </div>
+
+  <div class="arrow">↓ 按提示逐件拆开</div>
+
+  <div class="term">
+<span class="hd">=== 稿子.md ===</span>
+<span class="meta">  句子 8 条｜平均 8.3 字｜最长 10 字｜上限 30</span>
+<span class="meta">  硬违规 0 条｜提示 0 条</span>
+<span class="ok">  ✓ 干净</span>
+  </div>
+
+  <h2>七种场景，自动开合</h2>
+  <p class="sub">同一套规矩不能到处硬套——写标题时它反而会杀死点击率</p>
+  <div class="chips">
+    <span class="chip full"><b>攻略 / 步骤</b> · 全开</span>
+    <span class="chip"><b>解说稿 / 口播</b> · 只开 3 条</span>
+    <span class="chip full"><b>直播大纲 / 周报</b> · 全开</span>
+    <span class="chip"><b>查资料 / 核事实</b> · 只开 2 条</span>
+    <span class="chip full"><b>成稿体检</b> · 全开当检查器</span>
+    <span class="chip off"><b>标题 / 钩子</b> · 全关</span>
+    <span class="chip off"><b>创意 / 脑暴</b> · 全关</span>
+  </div>
+
+  <h2>五个值得拥有的理由</h2>
+  <ol>
+    <li><b>不搞一刀切</b>——写攻略全开、剪解说稿只开三条、做标题和脑洞全关，该飙情绪的地方绝不拦你</li>
+    <li><b>结果看得见</b>——自带中文检查器，一条命令标出超长句、客套话、藏主语、营销词，实测问题条数可从 2 条清到 0 条</li>
+    <li><b>句长直接掉十倍</b>——同一段内容改写前后，平均句长从 88 字降到 8.3 字，最长句 10 字</li>
+    <li><b>不只管 AI</b>——周报、邮件、攻略都能过一遍，看的人省劲，写的人也省劲</li>
+    <li><b>改到什么程度有数</b>——124 句基准样本跑出零硬违规，给你一条明确的合格线</li>
+  </ol>
+
+  <div class="cta">
+    <div class="t">现在装上「航空手册五条」</div>
+    <div class="d">让 AI 少绕弯子，一次把话说清楚。</div>
+  </div>
+
+  <div class="foot">
+    <span><b>航空手册五条</b> · 场景路由约束 + 中文结构检查器</span>
+    <span>作者：B站 二次元然酱</span>
+  </div>
+
+</div>
+</body>
+</html>
