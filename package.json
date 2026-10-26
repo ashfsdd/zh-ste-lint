@@ -1,0 +1,35 @@
+{
+  "name": "zh-ste-lint",
+  "version": "1.0.0",
+  "description": "中文受控语言结构检查器：句长、一句多事、被字句、客套话、营销形容词。移植自 ASD-STE100 航空维修受控语言的中文五条。",
+  "keywords": [
+    "ste",
+    "asd-ste100",
+    "simplified-technical-english",
+    "chinese",
+    "linter",
+    "writing",
+    "lint",
+    "中文写作",
+    "受控语言"
+  ],
+  "license": "MIT",
+  "main": "./zh-ste-lint.js",
+  "bin": {
+    "zh-ste-lint": "./zh-ste-lint.js"
+  },
+  "files": [
+    "zh-ste-lint.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "test": "node test/smoke.js"
+  },
+  "dependencies": {
+    "sentence-splitter": "^5.0.1"
+  }
+}
