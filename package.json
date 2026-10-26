@@ -14,6 +14,12 @@
     "受控语言"
   ],
   "license": "MIT",
+  "author": "二次元然酱",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashfsdd/zh-ste-lint.git"
+  },
+  "homepage": "https://github.com/ashfsdd/zh-ste-lint#readme",
   "main": "./zh-ste-lint.js",
   "bin": {
     "zh-ste-lint": "./zh-ste-lint.js"

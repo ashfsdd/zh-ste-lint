@@ -12,12 +12,18 @@ zh-ste-lint 稿子.md
   硬违规 0 条｜提示 1 条
 ```
 
+## 什么是「航空手册体」
+
+ASD-STE100 是航空维修行业的技术文档写作规范：飞机维修手册要交给全世界不同母语的地勤和机务看，
+一个词有歧义就可能出事故，所以它把英文压缩成受控语言——句子短、一句一事、用词统一、必须主动语态、
+不确定就写明不确定。本项目把它换算成中文五条，做成可自动执行的检查器。
+
 ## 为什么有这个
 
 | 现状 | 问题 |
 |---|---|
-| `danyuchn/asd-ste100-skill`（5.3k★）自带的英文 linter | 对中文**完全失效**：实测中文段落报 `0 violations, 1 words`（整段被当成 1 个词） |
-| 中文侧的 zhlint 一类工具 | 只查标点、中英文空格，**不查句长** |
+| 英文世界已有成熟的 STE 检查器 | 对中文**完全失效**：中文段落会被当成 1 个词，等于查不出问题 |
+| 中文侧的排版检查工具 | 只查标点、中英文空格，**不查句长** |
 | 手工审稿 | 长句和客套话肉眼容易滑过去 |
 
 这个工具补的就是中间那格：**中文 + 句子级结构检查**。
@@ -31,7 +37,7 @@ npm install -g zh-ste-lint
 从源码用：
 
 ```bash
-git clone https://github.com/<your-account>/zh-ste-lint.git
+git clone https://github.com/ashfsdd/zh-ste-lint.git
 cd zh-ste-lint
 npm install
 npm link          # 可选，让 zh-ste-lint 命令全局可用
@@ -74,17 +80,17 @@ AI 腔文本（`samples/ai-slop.txt`）：
   ✗ [filler] 客套话/填充语「建议用户」。要么给确定答案，要么直接说不确定。
 ```
 
-受控语言文本（`samples/up-narration.txt`，198 句）：
+受控语言文本（`samples/controlled-zh.txt`，124 句）：
 
 ```
-=== samples/up-narration.txt ===
-  句子 198 条｜平均 7.5 字｜最长 20 字｜上限 30
-  硬违规 0 条｜提示 1 条
+=== samples/controlled-zh.txt ===
+  句子 124 条｜平均 8.1 字｜最长 19 字｜上限 30
+  硬违规 0 条｜提示 2 条
   ! [hidden-actor] 含"被"字句，主语被藏起来。改成"谁去做某事"。
-      被确认之后再执行。
+      中文里的被字句常把主语藏起来。
 ```
 
-唯一的提示是原文在引用反例，属正确报出。
+两条提示都来自样本在讲解「被」字句时举的例子，属正常报出。
 
 ## 已知边界（重要）
 
@@ -93,15 +99,10 @@ AI 腔文本（`samples/ai-slop.txt`）：
 3. **30 字是中文换算值**，不是原版英文的 ≤20 词。真正的目标是「一句一事实」，别把 30 字当 KPI 硬抠。
 4. **客套话词表和营销词表是需要持续维护的资产**，遇到漏网的欢迎提 issue 或直接改 `zh-ste-lint.js` 里的两个数组。
 
-## 复用与致谢
+## 作者
 
-这个项目站在别人的肩膀上，自研的只有中文统计那一层：
-
-- [sentence-splitter](https://github.com/azu/textlint)（MIT，azu/textlint）—— 中文分句能力全部来自它，实测正确识别 `。！？`，没有自写正则
-- [danyuchn/asd-ste100-skill](https://github.com/danyuchn/asd-ste100-skill)（MIT）—— 规则设计与双严重度分级思路的来源；它对中文无效这件事，正是本项目存在的理由
-- **ASD-STE100 Issue 9**（2025-01）规则原文：程序句 ≤20 词、描述句 ≤25 词、段落 ≤6 句、禁用分号、主动语态
-- Karpathy 2026-10-02 的推荐：写作做到 STE 的 80%，再往上依次是图表、HTML、讲解视频
-- B站 UP「AI打工我享受」视频 [BV1pEJX6zEbM](https://www.bilibili.com/video/BV1pEJX6zEbM)—— 中文五条（句长 30 字 / 一句一事 / 同一词 / 主动语态 / 不确定就说不确定）的表述来源
+- B站：二次元然酱
+- 邮箱：331305990 [at] qq.com
 
 ## License
 

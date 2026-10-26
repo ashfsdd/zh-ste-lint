@@ -35,13 +35,13 @@ check('必须报出硬违规', slop.hard >= 1, `hard=${slop.hard} advisory=${slo
 check('必须识别出客套话', slop.findings.some((f) => f.rule === 'filler'), `filler=${slop.findings.filter((f) => f.rule === 'filler').length}`);
 check('必须识别出长句', slop.findings.some((f) => f.rule === 'long-sentence'), `maxLen=${slop.maxLen}`);
 
-const up = lint(path.join(SAMPLES, 'up-narration.txt'));
-console.log('\n[samples/up-narration.txt]');
+const up = lint(path.join(SAMPLES, 'controlled-zh.txt'));
+console.log('\n[samples/controlled-zh.txt]');
 check('受控语言样本零硬违规', up.hard === 0, `hard=${up.hard} advisory=${up.advisory}`);
-check('分句数量正确', up.sentences === 198, `sentences=${up.sentences}`);
+check('分句数量正确', up.sentences === 124, `sentences=${up.sentences}`);
 check('平均句长在短句区间', Number(up.avgLen) < 12, `avgLen=${up.avgLen}`);
 
-const strict = lint(path.join(SAMPLES, 'up-narration.txt'), ['--max', '15']);
+const strict = lint(path.join(SAMPLES, 'controlled-zh.txt'), ['--max', '15']);
 console.log('\n[--max 15 严格模式]');
 check('收紧上限后应报出更多长句', strict.hard > up.hard, `hard=${strict.hard}`);
 

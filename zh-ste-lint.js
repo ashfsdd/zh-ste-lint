@@ -2,12 +2,10 @@
 /**
  * zh-ste-lint.js — 航空维修手册五条 · 中文结构检查器
  *
- * 复用件（不重造轮子）：
- *   - sentence-splitter (MIT, azu/textlint) 负责中文分句 —— 已实测正确识别 。！？
- *   - 规则移植自 danyuchn/asd-ste100-skill (MIT) 的 ste-lint.py 思路
+ * 依赖：sentence-splitter（MIT 许可），负责中文分句
+ * 自研：中文字数统计、客套话词表、"被"字句检测、一句多事启发
  *
- * 自研部分（已搜遍无现成：ste-lint.py 对中文报 0 violations，实测确认）：
- *   - 中文字数统计、客套话词表、"被"字句检测、一句多事启发
+ * 作者：二次元然酱　|　B站：二次元然酱　|　邮箱：331305990 [at] qq.com
  *
  * 用法：
  *   node zh-ste-lint.js <文件...>
