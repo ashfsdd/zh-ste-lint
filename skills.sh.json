@@ -1,0 +1,13 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "中文写作与审稿",
+      "description": "基于航空维修手册写法标准的中文信息密度约束与结构检查工具。",
+      "skills": [
+        "ste-five-rules"
+      ]
+    }
+  ]
+}
